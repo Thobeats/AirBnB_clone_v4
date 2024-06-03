@@ -1,19 +1,19 @@
-/**This is the beginning of greatness */
+/** This is the beginning of greatness */
 
-$(document).ready(()=>{
-    // get the API status
-    $.ajax({
-        contentType: "application/json",
-        url: "http://0.0.0.0:5001/api/v1/places_search/",
-        method: "POST",
-        data: JSON.stringify({}),
-        success: (data)=>{
-            let temp = '';
-            for (let dt of data){
-                temp += `
+$(document).ready(() => {
+  // get the API status
+  $.ajax({
+    contentType: 'application/json',
+    url: 'http://0.0.0.0:5001/api/v1/places_search/',
+    method: 'POST',
+    data: JSON.stringify({}),
+    success: (data) => {
+      let temp = '';
+      for (const dt of data) {
+        temp += `
                     <article>
                         <div class="headline">
-                            <h2>${ dt.name }</h2>
+                            <h2>${dt.name}</h2>
                             <div class="price_by_night">${dt.price_by_night}</div>
                         </div>
                         <div class="information">
@@ -36,13 +36,13 @@ $(document).ready(()=>{
                         </div>
                     </article>
                 `;
-            }
+      }
 
-            $("section.places").append(temp)
-        },
-        error: (err) => {
-            console.error(err)
-        },
-        dataType: 'json'
-    })
-})
+      $('section.places').append(temp);
+    },
+    error: (err) => {
+      console.error(err);
+    },
+    dataType: 'json'
+  });
+});
