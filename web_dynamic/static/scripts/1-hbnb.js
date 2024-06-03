@@ -22,7 +22,7 @@ $(document).ready(() => {
     $('.amenities>h4').html('&nbsp;');
     if (amenities.length > 0) {
       for (const amenity in amenities) {
-        if (amenity == 0) {
+        if (amenity === 0) {
           $('.amenities>h4').append(`<span>${amenities[amenity].name}</span>`);
         } else {
           $('.amenities>h4').append(`<span>, ${amenities[amenity].name}</span>`);

@@ -1,13 +1,41 @@
 /** This is the beginning of greatness */
 
 $(document).ready(() => {
+  const amenities = [];
+  $('.popover').click((event) => {
+    const target = $(event.target);
+    if (target.is('input')) {
+      const amenity = target.data();
+      if (target.is(':checked')) {
+        amenities.push(amenity);
+        console.log(amenities);
+      } else {
+        amenities.splice(amenities.indexOf(amenity), 1);
+        console.log(amenities);
+      }
+      appendToH4(amenities);
+    }
+  });
+
+  function appendToH4 (amenities) {
+    $('.amenities>h4').html('&nbsp;');
+    if (amenities.length > 0) {
+      for (const amenity in amenities) {
+        if (amenity === 0) {
+          $('.amenities>h4').append(`<span>${amenities[amenity].name}</span>`);
+        } else {
+          $('.amenities>h4').append(`<span>, ${amenities[amenity].name}</span>`);
+        }
+      }
+    }
+  }
   // get the API status
   $('.filters button').click(() => {
     $.ajax({
       contentType: 'application/json',
       url: 'http://0.0.0.0:5001/api/v1/places_search/',
       method: 'POST',
-      data: JSON.stringify({}),
+      data: JSON.stringify({ amenities }),
       success: (data) => {
         let temp = '';
         $('section.places').empty();
